@@ -1,5 +1,7 @@
 let sideNavOpen = false;
 
+/* Side Menu */
+
 function initToggleNav(){
 	document.querySelector("#toggleButton").onclick = this.toggleNav;
 	document.querySelector("#toggleButton").textContent = ">" ;
