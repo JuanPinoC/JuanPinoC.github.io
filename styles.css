@@ -37,6 +37,8 @@
 
 	--primary-font: 'Major Mono Display', sans-serif;
 	--secondary-font: 'Orbitron', sans-serif;
+
+	--neon-pink: #FF0DBF;
 }
 
 /* CSS Reset */
@@ -471,5 +473,223 @@ aside .btn-neon:hover::before {
 	padding: 0.5rem;
 }
 
-/* Sticky Cookie jar */
+/* Fixed Cookie jar */
 
+.cookie-jar-container {
+	position: fixed;
+	bottom: 3rem;
+	right: 3rem;
+	background-color: transparent;
+	width: 9rem;
+	height: 8rem;
+}
+
+.cookie-jar {
+	position: relative;
+	margin: 0.5rem;
+	width: 100%;
+	height: 100%;
+	border: 0.15rem solid var(--neutral-color);
+	border-radius: 1rem 1rem 25% 25%;
+	background-color: var(--alt-background-color);
+	box-shadow: inset 0.5rem -0.5rem rgba(255, 255, 255, 0.15);
+	transition-duration: 0.4s;
+
+	font-family: var(--primary-font);
+	font-size: 1rem;
+	font-weight: bold;
+	color: var(--neutral-color);
+}
+
+.cookie-jar:hover {
+	font-weight: bolder;
+	color: var(--neon-pink);
+
+	border: 0.2rem solid var(--neon-pink);
+}
+
+.cookie-jar::before {
+	content: "";
+	position: absolute;
+	top: -1.5rem;
+	left: 50%;
+	height: 1rem;
+	width: 95%;
+	border: 0.15rem solid var(--neutral-color);
+	border-radius: 0.5rem 0.5rem 0 0;
+	background-color: var(--alt-background-color);
+	
+	transform-origin: 0 0;
+	transform: translateX(-50%) translateY(0) rotate(0deg);
+	transition: transform 2s linear, border 0.4s ease;
+}
+
+.cookie-jar:hover::before {
+	border: 0.2rem solid var(--neon-pink);
+	animation: openJarAnimation 0.4s linear 0s 1 normal;
+	animation-fill-mode: forwards;
+}
+
+.cookie-jar:not(:hover)::before {
+	animation:	closeJarAnimation 0.4s linear 0s 1 normal;
+	animation-fill-mode: forwards;
+}
+
+@keyframes openJarAnimation {
+	from { transform: translateX(-50%) translateY(0) rotate(0deg); }
+	to { transform: translateX(-50%) translateY(100%) rotate(-90deg); }
+}
+
+@keyframes closeJarAnimation {
+	from { transform: translateX(-50%) translateY(100%) rotate(-90deg); }
+	to { transform: translateX(-50%) translateY(0) rotate(0deg); }
+}
+
+.cookie-jar::after {
+	content: "";
+	position: absolute;
+	top: 10%;
+	left: 10%;
+	height: 20%;
+	width: 5%;
+	border-top-left-radius: 25%;
+	background-color: var(--background-color);
+	transition-duration: 0.4s;
+}
+
+.cookie-jar:hover::after {
+	background-color: var(--neon-pink);
+}
+
+.cookie-jar p {
+	position: relative;
+	top: 25%;
+	left: 10%;
+	width: 75%;
+	word-break: break-word;
+}
+
+.cookie {
+	position: relative;
+	z-index: -1;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	width: 60%;
+	height: 60%;
+	border-radius: 50%;
+	border: 0.35rem solid var(--neon-pink);
+	background-color: var(--alt-background-color);
+	box-shadow: inset 0.5rem -0.5rem rgba(255, 255, 255, 0.15);
+	transition: transform 2s linear;
+}
+
+.cookie-jar:hover .cookie {
+	animation: cookieOutAnimation 0.4s linear 0s 1 normal;
+	animation-fill-mode: forwards;
+}
+
+.cookie-jar:not(:hover) .cookie {
+	animation: cookieInAnimation 0.4s linear 0s 1 normal;
+	animation-fill-mode: forwards;
+}
+/*
+.cookie-jar:focus .cookie {
+	animation: eatCookieAnimation 0.4s ease 0s 1 normal;
+	animation-fill-mode: forwards;
+}
+*/
+@keyframes cookieOutAnimation {
+	from{
+		transform: translateX(-50%) translateY(-50%);
+	}
+	to{
+		transform: translateX(-50%) translateY(-125%);
+	}
+}
+
+@keyframes cookieInAnimation {
+	from {
+		transform: translateX(-50%) translateY(-125%);
+	}
+	to {
+		transform: translateX(-50%) translateY(-50%);
+	}
+}
+
+@keyframes eatCookieAnimation {
+	from {
+		transform: translateX(-50%) translateY(-125%);
+	}
+	to {
+		transform: translateX(-50%) translateY(-225%);
+	}
+}
+
+.cookie::before,
+.cookie::after {
+	position: absolute;
+}
+
+.cookie::before {
+
+}
+
+.cookie::after {
+
+}
+
+@keyframes smallBiteAnimation {
+	from {
+
+	}
+	to {
+
+	}
+}
+
+@keyframes bigBiteAnimation {
+	from {
+
+	}
+	to {
+
+	}
+}
+
+.chocolate-chips {
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  border-radius: 50%;
+  background-color: var(--neon-pink);
+}
+
+.chocolate-chips:nth-of-type(1) {
+	top: 15%;
+	left: 30%;
+}
+
+.chocolate-chips:nth-of-type(2) {
+	top: 20%;
+	left: 70%;
+}
+
+.chocolate-chips:nth-of-type(3) {
+	top: 45%;
+	left: 45%;
+}
+
+.chocolate-chips:nth-of-type(4) {
+	top: 45%;
+	left: 10%;
+}
+
+.chocolate-chips:nth-of-type(5) {
+	top: 60%;
+	left: 75%;
+}
+
+.chocolate-chips:nth-of-type(6) {
+	top: 75%;
+	left: 35%;
+}
