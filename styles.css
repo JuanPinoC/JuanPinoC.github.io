@@ -503,9 +503,9 @@ aside .btn-neon:hover::before {
 
 .cookie-jar:hover {
 	font-weight: bolder;
-	color: var(--neon-pink);
+	color: var(--primary-color);
 
-	border: 0.2rem solid var(--neon-pink);
+	border: 0.2rem solid var(--primary-color);
 }
 
 .cookie-jar::before {
@@ -522,16 +522,14 @@ aside .btn-neon:hover::before {
 	transform-origin: 0 0;
 	transform: translateX(-50%) translateY(0) rotate(0deg);
 	transition: transform 2s linear, border 0.4s ease;
-}
 
-.cookie-jar:hover::before {
-	border: 0.2rem solid var(--neon-pink);
-	animation: openJarAnimation 0.4s linear 0s 1 normal;
+	animation:	closeJarAnimation 0.4s linear 0s 1 normal;
 	animation-fill-mode: forwards;
 }
 
-.cookie-jar:not(:hover)::before {
-	animation:	closeJarAnimation 0.4s linear 0s 1 normal;
+.cookie-jar:hover::before {
+	border: 0.2rem solid var(--primary-color);
+	animation: openJarAnimation 0.4s linear 0s 1 normal;
 	animation-fill-mode: forwards;
 }
 
@@ -558,7 +556,7 @@ aside .btn-neon:hover::before {
 }
 
 .cookie-jar:hover::after {
-	background-color: var(--neon-pink);
+	background-color: var(--primary-color);
 }
 
 .cookie-jar p {
@@ -577,10 +575,15 @@ aside .btn-neon:hover::before {
 	width: 60%;
 	height: 60%;
 	border-radius: 50%;
-	border: 0.35rem solid var(--neon-pink);
+	border: 0.35rem solid var(--primary-color);
 	background-color: var(--alt-background-color);
 	box-shadow: inset 0.5rem -0.5rem rgba(255, 255, 255, 0.15);
-	transition: transform 2s linear;
+	transition: transform 2s linear, visibility 0s;
+	clip-path:	circle(50% at 50% 50%);
+
+	animation: cookieInAnimation 0.4s linear 0s 1 both;
+	animation-fill-mode: forwards;
+
 }
 
 .cookie-jar:hover .cookie {
@@ -588,28 +591,22 @@ aside .btn-neon:hover::before {
 	animation-fill-mode: forwards;
 }
 
-.cookie-jar:not(:hover) .cookie {
-	animation: cookieInAnimation 0.4s linear 0s 1 normal;
-	animation-fill-mode: forwards;
-}
-/*
 .cookie-jar:focus .cookie {
-	animation: eatCookieAnimation 0.4s ease 0s 1 normal;
-	animation-fill-mode: forwards;
+	animation: eatCookieAnimation 1.4s ease 0s 1 normal;
 }
-*/
+
 @keyframes cookieOutAnimation {
 	from{
 		transform: translateX(-50%) translateY(-50%);
 	}
 	to{
-		transform: translateX(-50%) translateY(-125%);
+		transform: translateX(-50%) translateY(-135%);
 	}
 }
 
 @keyframes cookieInAnimation {
 	from {
-		transform: translateX(-50%) translateY(-125%);
+		transform: translateX(-50%) translateY(-135%);
 	}
 	to {
 		transform: translateX(-50%) translateY(-50%);
@@ -618,41 +615,68 @@ aside .btn-neon:hover::before {
 
 @keyframes eatCookieAnimation {
 	from {
+		visibility: visible;
 		transform: translateX(-50%) translateY(-125%);
 	}
 	to {
-		transform: translateX(-50%) translateY(-225%);
+		transform: translateX(-50%) translateY(-235%);
+		visibility: hidden;
 	}
 }
 
+
 .cookie::before,
 .cookie::after {
+	z-index: 15;
 	position: absolute;
+	border: 0.3rem solid var(--primary-color);
+	border-radius: 50%;
+	background-color: var(--background-color);
+	/*box-shadow: -0.5rem 0.5rem 0 0 rgba(255, 255, 255, 0.9) inset;*/
+	visibility: hidden;
 }
 
 .cookie::before {
-
+	content: "";
+	top: -5%;
+	left: 60%;
+	height: 60%;
+	width: 60%;
 }
 
 .cookie::after {
+	content: "";
+	top: -15%;
+	left: 30%;
+	height: 90%;
+	width: 90%;
+}
 
+.cookie-jar:focus .cookie::before {
+	animation: smallBiteAnimation 0.2s ease 0.6s 1 normal;
+	animation-fill-mode: forwards;
+}
+
+.cookie-jar:focus .cookie::after {
+	animation: bigBiteAnimation 0.2s ease 1s 1 normal;
+	animation-fill-mode: forwards;
 }
 
 @keyframes smallBiteAnimation {
 	from {
-
+		visibility: hidden;
 	}
 	to {
-
+		visibility: visible;
 	}
 }
 
 @keyframes bigBiteAnimation {
 	from {
-
+		visibility: hidden;
 	}
 	to {
-
+		visibility: visible;
 	}
 }
 
@@ -661,7 +685,7 @@ aside .btn-neon:hover::before {
   width: 10%;
   height: 10%;
   border-radius: 50%;
-  background-color: var(--neon-pink);
+  background-color: var(--primary-color);
 }
 
 .chocolate-chips:nth-of-type(1) {
